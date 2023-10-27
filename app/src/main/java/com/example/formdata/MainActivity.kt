@@ -145,7 +145,7 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
     )
 
     Text(
-        text = "Jenis Kelamin",
+        text = "Jenis Kelamin :",
         modifier = Modifier.fillMaxWidth()
         )
 
@@ -155,7 +155,7 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
     )
 
     Text(
-        text = "Status",
+        text = "Status :",
         modifier = Modifier.fillMaxWidth()
     )
 
@@ -186,17 +186,18 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
             fontSize = 16.sp
             )
     }
-    Spacer(modifier = Modifier.height(100.dp))
     TextHasil(
         namanya = cobaViewModel.namaUsr,
         telponnya = cobaViewModel.noTlp,
+        jenisnya = cobaViewModel.jenisKl,
+        emailnya = cobaViewModel.emailLgkp,
+        statusnya = cobaViewModel.statusBM,
         alamatnya = cobaViewModel.alamatRmh,
-        jenisnya = cobaViewModel.jenisKl
     )
 }
 
 @Composable
-fun TextHasil(namanya: String, telponnya: String, alamatnya: String, jenisnya: String) {
+fun TextHasil(namanya: String, telponnya: String, alamatnya: String, jenisnya: String, emailnya: String, statusnya: String) {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
@@ -215,12 +216,22 @@ fun TextHasil(namanya: String, telponnya: String, alamatnya: String, jenisnya: S
                 .padding(horizontal = 10.dp, vertical = 5.dp)
         )
         Text(
-            text = "Alamat : " + alamatnya,
+            text = "Email : " + emailnya,
             modifier = Modifier
                 .padding(horizontal = 10.dp, vertical = 5.dp)
         )
         Text(
             text = "Jenis Kelamin : " + jenisnya,
+            modifier = Modifier
+                .padding(horizontal = 10.dp, vertical = 5.dp)
+        )
+        Text(
+            text = "Status : " + statusnya,
+            modifier = Modifier
+                .padding(horizontal = 10.dp, vertical = 5.dp)
+        )
+        Text(
+            text = "Alamat : " + alamatnya,
             modifier = Modifier
                 .padding(horizontal = 10.dp, vertical = 5.dp)
         )
@@ -267,7 +278,9 @@ fun SelectBM(
     onSelectionChanged: (String) -> Unit = {}
 ) { var selectedValue by rememberSaveable { mutableStateOf("") }
 
-    Row(modifier = Modifier.padding(5.dp)) {
+    Row(modifier = Modifier
+        .padding(5.dp)
+        .fillMaxWidth()) {
         options.forEach { item ->
             Row(
                 modifier = Modifier.selectable(
