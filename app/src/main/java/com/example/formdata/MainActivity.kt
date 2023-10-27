@@ -244,6 +244,37 @@ fun SelectJK(
 }
 
 @Composable
+fun SelectBM(
+    options: List<String>,
+    onSelectionChanged: (String) -> Unit = {}
+) { var selectedValue by rememberSaveable { mutableStateOf("") }
+
+    Row(modifier = Modifier.padding(16.dp)) {
+        options.forEach { item ->
+            Row(
+                modifier = Modifier.selectable(
+                    selected = selectedValue == item,
+                    onClick = {
+                        selectedValue = item
+                        onSelectionChanged(item)
+                    }
+                ),
+                verticalAlignment =  Alignment.CenterVertically
+            ) {
+                RadioButton(
+                    selected = selectedValue == item,
+                    onClick = {
+                        selectedValue = item
+                        onSelectionChanged(item)
+                    }
+                )
+                Text(item)
+            }
+        }
+    }
+}
+
+@Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
