@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.formdata.DataSource.jenis
+import com.example.formdata.DataSource.status
 import com.example.formdata.ui.theme.FormDataTheme
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
@@ -143,9 +144,24 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
         }
     )
 
+    Text(
+        text = "Jenis Kelamin",
+        modifier = Modifier.fillMaxWidth()
+        )
+
     SelectJK(
         options = jenis.map {id -> context.resources.getString(id)},
-        onSelectionChanged = {cobaViewModel.setJenisK(it)}
+        onSelectionChanged = {cobaViewModel.setJenisK(it)},
+    )
+
+    Text(
+        text = "Status",
+        modifier = Modifier.fillMaxWidth()
+    )
+
+    SelectBM(
+        options = status.map {id -> context.resources.getString(id)},
+        onSelectionChanged = {cobaViewModel.setStatusM(it)}
     )
 
     OutlinedTextField(
@@ -162,7 +178,7 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
     Button(
         modifier = Modifier.fillMaxWidth(),
         onClick = {
-            cobaViewModel.insertData(textNama, textTlp, textAlamat, dataForm.sex)
+            cobaViewModel.insertData(textNama, textTlp, textAlamat, dataForm.sex, textEmail, dataForm.stat)
         }
     ) {
         Text(
@@ -218,7 +234,9 @@ fun SelectJK(
 ) {
     var selectedValue by rememberSaveable { mutableStateOf("") }
 
-    Row(modifier = Modifier.padding(16.dp)) {
+    Row(modifier = Modifier
+        .padding(5.dp)
+        .fillMaxWidth()) {
         options.forEach { item ->
             Row(
                 modifier = Modifier.selectable(
@@ -249,7 +267,7 @@ fun SelectBM(
     onSelectionChanged: (String) -> Unit = {}
 ) { var selectedValue by rememberSaveable { mutableStateOf("") }
 
-    Row(modifier = Modifier.padding(16.dp)) {
+    Row(modifier = Modifier.padding(5.dp)) {
         options.forEach { item ->
             Row(
                 modifier = Modifier.selectable(
