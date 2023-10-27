@@ -133,6 +133,22 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
     )
 
     OutlinedTextField(
+        value = textEmail,
+        singleLine = true,
+        shape = MaterialTheme.shapes.large,
+        modifier = Modifier.fillMaxWidth(),
+        label = {Text(text = "Email")},
+        onValueChange = {
+            textEmail = it
+        }
+    )
+
+    SelectJK(
+        options = jenis.map {id -> context.resources.getString(id)},
+        onSelectionChanged = {cobaViewModel.setJenisK(it)}
+    )
+
+    OutlinedTextField(
         value = textAlamat,
         singleLine = true,
         shape = MaterialTheme.shapes.large,
@@ -141,11 +157,6 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
         onValueChange = {
             textAlamat = it
         }
-    )
-
-    SelectJK(
-        options = jenis.map {id -> context.resources.getString(id)},
-        onSelectionChanged = {cobaViewModel.setJenisK(it)}
     )
 
     Button(
