@@ -39,6 +39,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -73,16 +74,19 @@ fun TampilLayout(modifier: Modifier = Modifier) {
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.Start,
             modifier = Modifier.padding(20.dp)
         ) {
-            Row {
+            Row (
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Start
+            ){
                 Image(
                     painter = painterResource(id = R.drawable.baseline_arrow_back_24),
-                    contentDescription = "",
-                    modifier = Modifier
+                    contentDescription = ""
                 )
-                Text(text = "Register")
+                Text(text = "Register",
+                    textAlign = TextAlign.Center)
             }
             Divider()
             Text(
